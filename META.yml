@@ -1,0 +1,30 @@
+---
+abstract: 'Plack application to display the sessions of OpenVPN server'
+author:
+  - 'Anton Gerasimov <chim@cpan.org>'
+build_requires:
+  Test::More: 0.98
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112150'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Plack-App-OpenVPN-Status
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Plack: 0.9979
+  Text::MicroTemplate: 0.15
+  parent: 0
+  perl: 5.010000
+  strict: 0
+  warnings: 0
+resources:
+  bugtracker: https://github.com/Wu-Wu/Plack-App-OpenVPN-Status/issues
+  repository: https://github.com/Wu-Wu/Plack-App-OpenVPN-Status
+version: v0.1.4
