@@ -1,21 +1,25 @@
-Makefile.PL
 Changes
+LICENSE
 MANIFEST
+META.json
+META.yml
+Makefile.PL
 README
+dist.ini
 eg/app.psgi
 eg/static/bootstrap.min.css
 eg/status.log
-t/00_compile.t
-t/01_basic.t
-t/02_status_version_1.t
-t/03_status_version_2.t
-t/04_status_version_3.t
-t/05_pod.t
-t/06_custom_view.t
+lib/Plack/App/OpenVPN/Status.pm
+t/00-compile.t
+t/01-basic.t
+t/02-status_all.t
+t/03-custom_view.t
+t/release-distmeta.t
+t/release-kwalitee.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
+t/release-test-version.t
 t/status-empty.log
 t/status-v1.log
 t/status-v2.log
 t/status-v3.log
-lib/Plack/App/OpenVPN/Status.pm
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)

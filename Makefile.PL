@@ -1,40 +1,59 @@
-use 5.010;
-use ExtUtils::MakeMaker;
 
-my $meta_merge = {
-    META_MERGE => {
-        resources => {
-            repository => 'https://github.com/Wu-Wu/Plack-App-OpenVPN-Status',
-            bugtracker => 'https://github.com/Wu-Wu/Plack-App-OpenVPN-Status/issues',
-        },
-    }
-};
+use strict;
+use warnings;
 
-my %options = (
-    'NAME'          => 'Plack::App::OpenVPN::Status',
-    'VERSION_FROM'  => 'lib/Plack/App/OpenVPN/Status.pm',
-    'AUTHOR'        => 'Anton Gerasimov <chim@cpan.org>',
-    'ABSTRACT_FROM' => 'lib/Plack/App/OpenVPN/Status.pm',
-    'LICENSE'       => 'perl',
-    'PREREQ_PM'     => {
-        'Plack'   => '0.9979',
-        'Text::MicroTemplate' => '0.15',
-        'parent'  => 0,
-        'strict'  => 0,
-        'warnings' => 0
-    },
-    'BUILD_REQUIRES' => {
-        'Test::More' => '0.98',
-        'Test::Pod'  => '1.22',
-    },
-    'MIN_PERL_VERSION' => '5.10.0',
-    'test' => {
-        'TESTS' => 't/*.t',
-    },
-    'clean' => {
-        'FILES' => '*.tar.gz',
-    },
-    $ExtUtils::MakeMaker::VERSION >= 6.50 ? (%$meta_merge) : (),
+use 5.010001;
+
+use ExtUtils::MakeMaker 6.30;
+
+
+
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "Plack application to display the sessions of OpenVPN server",
+  "AUTHOR" => "Anton Gerasimov <chim\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "Pod::Coverage::TrustPod" => 0,
+    "Test::CPAN::Meta" => 0,
+    "Test::More" => 0,
+    "Test::Pod" => 0
+  },
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
+  },
+  "DISTNAME" => "Plack-App-OpenVPN-Status",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Plack::App::OpenVPN::Status",
+  "PREREQ_PM" => {
+    "Plack" => "0.9979",
+    "Text::MicroTemplate" => "0.15",
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "VERSION" => "0.16",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
 );
 
-WriteMakefile(%options);
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+

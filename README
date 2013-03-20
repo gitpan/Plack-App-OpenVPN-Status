@@ -2,6 +2,9 @@ NAME
     Plack::App::OpenVPN::Status - Plack application to display the sessions
     of OpenVPN server
 
+VERSION
+    version 0.16
+
 SYNOPSIS
         use Plack::Builder;
         use Plack::App::File;
@@ -19,7 +22,7 @@ DESCRIPTION
     Plack::App::OpenVPN::Status is an application to display active sessions
     of the OpenVPN server.
 
-    It parse OpenVPN status log and display active sessions. Supported all
+    It parses OpenVPN status log and displays active sessions. Supported all
     three versions of the status log. Check the OpenVPN server documentation
     how to set up version. Howewer, there is no needs (and no ability, at
     the moment) to point version of status log. Application detect it
@@ -67,8 +70,20 @@ METHODS
     This is the default view to display sessions. It uses Twitter Bootstrap
     layout.
 
+  openvpn_status
+    Parses OpenVPN status log. Automatically selects parser for given
+    version of file.
+
+  prepare_app
+    See Plack::Component
+
+  call
+    See Plack::Component
+
 SEE ALSO
     Plack
+
+    Plack::Component
 
     Text::MicroTemplate
 
@@ -78,11 +93,11 @@ SEE ALSO
     Twitter Bootstrap <https://github.com/twitter/bootstrap>
 
 AUTHOR
-    Anton Gerasimov, <chim@cpan.org>
+    Anton Gerasimov <chim@cpan.org>
 
 COPYRIGHT AND LICENSE
-    Copyright (C) 2012 by Anton Gerasimov
+    This software is copyright (c) 2012 by Anton Gerasimov.
 
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

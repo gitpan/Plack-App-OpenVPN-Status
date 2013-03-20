@@ -2,16 +2,17 @@ package Plack::App::OpenVPN::Status;
 
 # ABSTRACT: Plack application to display the sessions of OpenVPN server
 
-use 5.010;
 use strict;
 use warnings;
+use feature ':5.10';
 
 use parent 'Plack::Component';
 use Carp ();
 use Text::MicroTemplate;
 use Plack::Util::Accessor qw/renderer status_from custom_view/;
 
-our $VERSION = '0.15';
+our $VERSION = '0.16'; # VERSION
+our $AUTHORITY = 'cpan:CHIM'; # AUTHORITY
 
 #
 # default view (uses Twitter Bootstrap v2.x.x layout)
@@ -83,7 +84,7 @@ sub prepare_app {
             $t_view = $self->custom_view->();
         }
         else {
-            Carp::carp "Parameter 'custom_view' must be a CODEREF";
+            Carp::croak "Parameter 'custom_view' must be a CODEREF";
         }
     }
 
@@ -290,7 +291,8 @@ sub _ovpn_status_v2_parse {
     $vars;
 }
 
-1;
+1; # End of Plack::App::OpenVPN::Status
+
 __END__
 
 =pod
@@ -298,6 +300,10 @@ __END__
 =head1 NAME
 
 Plack::App::OpenVPN::Status - Plack application to display the sessions of OpenVPN server
+
+=head1 VERSION
+
+version 0.16
 
 =head1 SYNOPSIS
 
@@ -317,7 +323,7 @@ Plack::App::OpenVPN::Status - Plack application to display the sessions of OpenV
 
 B<Plack::App::OpenVPN::Status> is an application to display active sessions of the OpenVPN server.
 
-It parse OpenVPN status log and display active sessions. Supported all three versions of the status log. Check the OpenVPN server documentation how to set up version. Howewer, there is no needs (and no ability, at the moment) to point version of status log. Application detect it authomatically. Also status log version will be diplayed on the generated web page.
+It parses OpenVPN status log and displays active sessions. Supported all three versions of the status log. Check the OpenVPN server documentation how to set up version. Howewer, there is no needs (and no ability, at the moment) to point version of status log. Application detect it authomatically. Also status log version will be diplayed on the generated web page.
 
 I<Twitter Bootstrap> layout is used to diplay active OpenVPN sessions.
 
@@ -364,9 +370,23 @@ Now B<$vars> contains the structure like this:
 
 This is the default view to display sessions. It uses Twitter Bootstrap layout.
 
+=head2 openvpn_status
+
+Parses OpenVPN status log. Automatically selects parser for given version of file.
+
+=head2 prepare_app
+
+See L<Plack::Component>
+
+=head2 call
+
+See L<Plack::Component>
+
 =head1 SEE ALSO
 
 L<Plack>
+
+L<Plack::Component>
 
 L<Text::MicroTemplate>
 
@@ -376,13 +396,13 @@ L<Twitter Bootstrap|https://github.com/twitter/bootstrap>
 
 =head1 AUTHOR
 
-Anton Gerasimov, E<lt>chim@cpan.orgE<gt>
+Anton Gerasimov <chim@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2012 by Anton Gerasimov
+This software is copyright (c) 2012 by Anton Gerasimov.
 
-This library is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
